@@ -39,10 +39,17 @@ export const LoginPage: VFC = memo(() => {
     
     return (
         <HeaderFooterLayout>
-            <Flex alignItems="center" justifyContent="center" height="100vh">
+            <Flex 
+                position="fixed"
+                alignItems="center" 
+                justifyContent="center" 
+                top="10%"
+                bottom="5%"
+                height="85%" 
+                width="100vw"
+            >
                 <Box
                     m={0}
-                    position='fixed'
                     top='30vh'
                     bg="white" 
                     w="sm" 

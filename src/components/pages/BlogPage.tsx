@@ -5,6 +5,10 @@ import {
     Text
 } from "@chakra-ui/react";
 
+import { MyBlog } from "../organisms/blog/MyBlog";
+import { AllBlog } from "../organisms/blog/AllBlog";
+
+
 import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 
 
@@ -13,14 +17,43 @@ import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 import { useLoginUser, LoginUser } from "../../hooks/Providers/useLoginUserProvider";
 
 export const BlogPage: VFC = memo(() => {
-    const a = useLoginUser().loginUser
-    console.log(a);//email get ok
     
     return (
         <HeaderFooterLayout>
-            <Flex>
-                <Text>Hello!{a.email}</Text>
-                <Text>BlogPage</Text>
+            <Flex                 
+                position="fixed"
+                alignItems="center" 
+                justifyContent="center" 
+                top="10%"
+                bottom="5%"
+                height="85%" 
+                width="100vw"
+            >
+                <Flex
+                    position="fixed"
+                    alignItems="center" 
+                    justifyContent="center" 
+                    top="10%"
+                    bottom="5%"
+                    left="0%"
+                    height="85%" 
+                    width="50vw"
+                >
+                    <MyBlog 
+                    />
+                </Flex>
+                <Flex
+                    position="fixed"
+                    alignItems="center" 
+                    justifyContent="center" 
+                    top="10%"
+                    bottom="5%"
+                    right="0%"
+                    height="85%" 
+                    width="50vw"
+                >
+                    <AllBlog />
+                </Flex>
             </Flex>
         </HeaderFooterLayout>
         );

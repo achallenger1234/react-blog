@@ -3,17 +3,34 @@ import { memo, VFC } from "react";
 import { 
     Flex,
     Heading,
-    Center
+    Center,
+    useDisclosure
     
     
 } from "@chakra-ui/react";
 
+
+import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserProvider"
+
+import { MenuIconButton } from "../../atoms/button/MenuIconButton";
+
 export const Header: VFC = memo(() => {
-    return (        <>
+    
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    
+    const loginUser: LoginUser = useLoginUser().loginUser
+    console.log(loginUser);
+    
+    
+    return (        
+        <>
             <Flex 
+                position='fixed'
+                top={0}
                 bg='green.100' 
                 color='green.900'
-                h={20}
+                h="10%"
+                w="100%"
                 align="center"
                 justify="space-between"
             >
@@ -24,13 +41,15 @@ export const Header: VFC = memo(() => {
                         Chakra-Blog
                     </Heading>
                 </Center>
+                {loginUser == null ? (
+                    <p></p>
+                ) : (
                 <Center>
-                    <Heading
-                        m={6}
-                    >
-                        ヘッダー
-                    </Heading>
+                    <p>humberger</p>
+                    <MenuIconButton onOpen={onOpen} />
                 </Center>
+                ) }
+
             </Flex>
         </>
 

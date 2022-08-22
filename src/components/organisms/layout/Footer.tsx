@@ -12,10 +12,10 @@ export const Footer: VFC = memo(() => {
         <Center 
             bg='green.100' 
             color='white.500'
-            h={10}
             mb={0}
             position='fixed'
             bottom={0}
+            h="5%"
             w="100%"
         >
             <Heading
