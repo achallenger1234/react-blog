@@ -15,20 +15,9 @@ import {
 import { DefaultButton } from "../atoms/button/DefaultButton"
 import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 
-import { useAuth } from "../../hooks/Login/useAuth"
-
-
-// type LoginUser = {
-//     userId: number;
-//     password: string;
-// }
+import { useAuth } from "../../hooks/Login/useAuth";
 
 export const LoginPage: VFC = memo(() => {
-    
-    // const initialUser: LoginUser = {
-    //     userId: 0,
-    //     password: ''
-    // }
     
     const [userEmail, setUserEmail] = useState('');
     
