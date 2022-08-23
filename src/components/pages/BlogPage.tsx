@@ -2,12 +2,13 @@ import { memo, VFC } from "react"
 
 import { 
     Flex ,
-    Text
+    Text,
+    Box
 } from "@chakra-ui/react";
 
 import { MyBlog } from "../organisms/blog/MyBlog";
 import { AllBlog } from "../organisms/blog/AllBlog";
-
+import { SerchBlog } from "../organisms/blog/SerchBlog";
 
 import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 
@@ -36,11 +37,27 @@ export const BlogPage: VFC = memo(() => {
                     top="10%"
                     bottom="5%"
                     left="0%"
-                    height="85%" 
-                    width="50vw"
+                    height="85vh" 
+                    width="70vw"
                 >
-                    <MyBlog 
-                    />
+                    <Box
+                        position="fixed"
+                        left="5vw"
+                        top="10%"
+                        w="60vw"
+                        h="15vh"
+                    >
+                        <SerchBlog />                
+                    </Box>
+                    <Box
+                        position="fixed"
+                        left="5vw"
+                        bottom="10%"
+                        w="60vw"
+                        h="65vh"
+                    >
+                        <AllBlog />                
+                    </Box>
                 </Flex>
                 <Flex
                     position="fixed"
@@ -49,10 +66,10 @@ export const BlogPage: VFC = memo(() => {
                     top="10%"
                     bottom="5%"
                     right="0%"
-                    height="85%" 
-                    width="50vw"
+                    height="85vh" 
+                    width="30vw"
                 >
-                    <AllBlog />
+                    <MyBlog />
                 </Flex>
             </Flex>
         </HeaderFooterLayout>
