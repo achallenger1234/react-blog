@@ -26,20 +26,24 @@ export const CreateBlog: VFC = memo(() => {
     const loginUser: LoginUser = useLoginUser().loginUser
     console.log(loginUser);//email get ok
     
-    const [ inputTitle, setInputTitle ] = useState(); 
+    const [ inputTitle, setInputTitle ] = useState(''); 
     
-    const [ inputText, setInputText ] = useState();
+    const [ inputText, setInputText ] = useState('');
     
     const onChangeTitle= (e) => setInputTitle(e.target.value)
     
     const onChangeText= (e) => setInputText(e.target.value)
     
     const onClickCencel = () => {
-        
+        setInputTitle('');
+        setInputText('');
     }
     
     const onClickPost = () => {
+        //post logic
         
+        setInputTitle('');
+        setInputText('');
     }
 
     return (
@@ -56,6 +60,7 @@ export const CreateBlog: VFC = memo(() => {
             <FormControl isRequired>
                 <FormLabel>Title</FormLabel>
                 <Input 
+                    value={inputTitle}
                     placeholder='morning routean'
                     onChange={onChangeTitle}
                 />
@@ -63,27 +68,28 @@ export const CreateBlog: VFC = memo(() => {
             <FormControl isRequired>
                 <FormLabel>Text</FormLabel>
                 <Textarea 
+                    value={inputText}
                     placeholder='I don`t like morning. So I don`t like mornig'
                     h="30vh"
                     w="29vw"
                     onChange={onChangeText}
                 />
-                <Divider my={1} />
-                <Center ml="4vw" mr="4vw">
-                    <DefaultButton
-                        onClick={onClickCencel}
-                        loading={false}
-                        disabled={inputTitle === "" && inputText === ""}
-                    >Cancel</DefaultButton>
-                    <Divider mx={10} />
-                    <DefaultButton
-                        onClick={onClickPost}
-                        loading={false}
-                        disabled={inputTitle === "" || inputText === ""}
-                    >Post</DefaultButton>
-                    
-                </Center>
             </FormControl>
+            <Divider my={1} />
+            <Center ml="4vw" mr="4vw">
+                <DefaultButton
+                    onClick={onClickCencel}
+                    loading={false}
+                    disabled={inputTitle === "" && inputText === ""}
+                >Cancel</DefaultButton>
+                <Divider mx={10} />
+                <DefaultButton
+                    onClick={onClickPost}
+                    loading={false}
+                    disabled={inputTitle === "" || inputText === ""}
+                >Post</DefaultButton>
+                
+            </Center>
         </Box>
     );
 });

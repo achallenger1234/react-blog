@@ -5,13 +5,19 @@ import { BlogPage } from "../components/pages/BlogPage";
 import { EditPage } from "../components/pages/EditPage";
 import { Page404 } from "../components/pages/Page404";
 
+import { SelectBlogProvider } from "../hooks/Providers/useSelectBlogProvider"
+
 export const Router = () => {
     
     return (
         <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/blog" element={<BlogPage />} />
-            <Route path="/edit" element={<EditPage />} />
+            <Route path="/edit" element={
+                <SelectBlogProvider>
+                    <EditPage />
+                </SelectBlogProvider>
+            } />
             <Route path="/*" element={<Page404 />} />
         </Routes>
         );

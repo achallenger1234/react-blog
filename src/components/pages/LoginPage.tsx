@@ -15,7 +15,7 @@ import {
 import { DefaultButton } from "../atoms/button/DefaultButton"
 import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 
-import { useAuth } from "../../hooks/Login/useAuth";
+import { useAuth } from "../../hooks/User/useAuth";
 
 export const LoginPage: VFC = memo(() => {
     

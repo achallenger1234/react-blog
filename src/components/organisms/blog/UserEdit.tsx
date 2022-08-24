@@ -26,27 +26,33 @@ export const UserEdit: VFC = memo(() => {
     const loginUser: LoginUser = useLoginUser().loginUser
     console.log(loginUser);//email get ok
     
-    const [ inputTitle, setInputTitle ] = useState(); 
+    const [ inputNewName, setInputNewName ] = useState(''); 
     
-    const [ inputText, setInputText ] = useState();
+    const [ inputOldPassword, setInputOldPassword ] = useState('');
     
-    const onChangeTitle= (e) => setInputTitle(e.target.value)
+    const [ inputNewPassword, setInputNewPassword ] = useState('');
     
-    const onChangeText= (e) => setInputText(e.target.value)
+    const onChangeNewName= (e) => setInputNewName(e.target.value)
+    const onChangeOldPassword= (e) => setInputOldPassword(e.target.value)
+    const onChangeNewPassword= (e) => setInputNewPassword(e.target.value)
     
     const onClickCencel = () => {
-        
+        setInputNewName('');
+        setInputOldPassword('');
+        setInputNewPassword('');
     }
     
     const onClickPost = () => {
+        //logic
+        
+        setInputNewName('');
+        setInputOldPassword('');
+        setInputNewPassword('');
         
     }
     
-    const flag = true;
 
     return (
-        <>
-        {!flag ?  (
         
             <Box
                 bg="white"
@@ -59,84 +65,42 @@ export const UserEdit: VFC = memo(() => {
                 <Heading as="h3" size="md" textAlign="center">user edit</Heading>
                 <Divider my={2} />
                 <FormControl isRequired>
-                    <FormLabel>name</FormLabel>
+                    <FormLabel>new name</FormLabel>
                     <Input 
-                        onChange={onChangeTitle}
+                        value={inputNewName}
+                        onChange={onChangeNewName}
                     />
                 </FormControl>
                 <FormControl isRequired>
-                    <FormLabel>password</FormLabel>
+                    <FormLabel>old password</FormLabel>
                     <Input 
-                        onChange={onChangeTitle}
+                        value={inputOldPassword}
+                        onChange={onChangeOldPassword}
                     />
-                    <Divider my={70} />
-                    <Center ml="4vw" mr="4vw">
-                        <Flex>
-                            <DefaultButton
-                                onClick={onClickCencel}
-                                loading={false}
-                                disabled={inputTitle === "" && inputText === ""}
-                            >Cancel</DefaultButton>
-                            <Divider mx={10} />
-                            <DefaultButton
-                                onClick={onClickPost}
-                                loading={false}
-                                disabled={inputTitle === "" || inputText === ""}
-                            >change</DefaultButton>
-                        </Flex>
-                    </Center>
                 </FormControl>
+                <FormControl isRequired>
+                    <FormLabel>new password</FormLabel>
+                    <Input 
+                        value={inputNewPassword}
+                        onChange={onChangeNewPassword}
+                    />
+                </FormControl>
+                <Divider my={38} />
+                <Center ml="4vw" mr="4vw">
+                    <DefaultButton
+                        onClick={onClickCencel}
+                        loading={false}
+                        disabled={inputNewName === "" && inputOldPassword === "" &&  inputNewPassword === ""}
+                    >Cancel</DefaultButton>
+                    <Divider mx={10} />
+                    <DefaultButton
+                        onClick={onClickPost}
+                        loading={false}
+                        disabled={inputNewName === "" || inputOldPassword === ""  || inputNewPassword === "" }
+                    >change</DefaultButton>
+                </Center>
             </Box>
             
-        ) : (
-        
-            <Box
-                bg="white"
-                borderRadius="10px"
-                shadow="md"
-                w="30vw"
-                h="65vh"
-                p="1vh"
-            >
-                <Heading as="h3" size="md" textAlign="center">change post</Heading>
-                <Divider my={2} />
-                <FormControl isRequired>
-                    <FormLabel>new Title</FormLabel>
-                    <Input 
-                        placeholder='pre title'
-                        onChange={onChangeTitle}
-                    />
-                </FormControl>
-                <FormControl isRequired>
-                    <FormLabel>new Text</FormLabel>
-                    <Textarea 
-                        placeholder='pre body'
-                        h="30vh"
-                        w="29vw"
-                        onChange={onChangeText}
-                    />
-                    <Divider my={1} />
-                    <Center ml="4vw" mr="4vw">
-                        <DefaultButton
-                            onClick={onClickCencel}
-                            loading={false}
-                            disabled={inputTitle === "" && inputText === ""}
-                        >Cancel</DefaultButton>
-                        <Divider mx={10} />
-                        <DefaultButton
-                            onClick={onClickPost}
-                            loading={false}
-                            disabled={inputTitle === "" || inputText === ""}
-                        >Update</DefaultButton>
-                    </Center>
-                </FormControl>
-            </Box>
-            
-        )}
-        
-        </>
-        
-        
         
     );
 });

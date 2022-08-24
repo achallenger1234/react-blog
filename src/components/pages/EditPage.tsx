@@ -6,9 +6,12 @@ import {
     Box
 } from "@chakra-ui/react";
 
-import { UserEdit } from "../organisms/blog/UserEdit";
+
 import { SerchBlog } from "../organisms/blog/SerchBlog";
 import { MyBlog } from "../organisms/blog/MyBlog";
+
+import { UserEdit } from "../organisms/blog/UserEdit";
+import { BlogEdit } from "../organisms/blog/BlogEdit";
 
 import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 
@@ -18,6 +21,8 @@ import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 import { useLoginUser, LoginUser } from "../../hooks/Providers/useLoginUserProvider";
 
 export const EditPage: VFC = memo(() => {
+    
+    const blogEditFlag  = true;
     
     return (
         <HeaderFooterLayout iconFlag={false}>
@@ -72,7 +77,7 @@ export const EditPage: VFC = memo(() => {
                     height="85vh" 
                     width="40vw"
                 >
-                    <UserEdit />
+                    {blogEditFlag ? (<UserEdit />) : (<BlogEdit />)}
                 </Flex>
             </Flex>
         </HeaderFooterLayout>
