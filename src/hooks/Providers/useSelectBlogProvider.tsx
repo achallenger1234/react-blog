@@ -9,8 +9,7 @@ import React, {
 
 
 export type SelectBlog = {
-    userId: number;
-    email: string;
+    id: number;
 };
 
 type SelectBlogContextType = {

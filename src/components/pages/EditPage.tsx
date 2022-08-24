@@ -1,4 +1,7 @@
-import { memo, VFC } from "react"
+
+// @ts-nocheck
+
+import { memo, VFC, useState } from "react"
 
 import { 
     Flex ,
@@ -20,11 +23,23 @@ import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 
 import { useLoginUser, LoginUser } from "../../hooks/Providers/useLoginUserProvider";
 
+import { SelectBlog, useSelectBlog } from "../../hooks/Providers/useSelectBlogProvider"
+
 export const EditPage: VFC = memo(() => {
     
-    const blogEditFlag  = true;
+    const [blogEditFlag, setblogEditFlag] = useState(true)
     
-    return (
+    const arraySelectBlog: SelectBlog = useSelectBlog().SelectBlog
+    
+    try{
+        if ( arraySelectBlog.id == null ) {
+            console.log("null")
+        } else {
+            var selectBlog = arraySelectBlog.id
+            console.log(selectBlog);
+        }
+    } finally{
+        return (
         <HeaderFooterLayout iconFlag={false}>
             <Flex                 
                 position="fixed"
@@ -82,4 +97,7 @@ export const EditPage: VFC = memo(() => {
             </Flex>
         </HeaderFooterLayout>
         );
+    }
+    
+    
 })
