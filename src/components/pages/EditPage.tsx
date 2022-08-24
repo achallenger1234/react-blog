@@ -6,9 +6,9 @@ import {
     Box
 } from "@chakra-ui/react";
 
-import { MyBlog } from "../organisms/blog/MyBlog";
-import { AllBlog } from "../organisms/blog/AllBlog";
+import { UserEdit } from "../organisms/blog/UserEdit";
 import { SerchBlog } from "../organisms/blog/SerchBlog";
+import { MyBlog } from "../organisms/blog/MyBlog";
 
 import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 
@@ -20,7 +20,7 @@ import { useLoginUser, LoginUser } from "../../hooks/Providers/useLoginUserProvi
 export const EditPage: VFC = memo(() => {
     
     return (
-        <HeaderFooterLayout>
+        <HeaderFooterLayout iconFlag={false}>
             <Flex                 
                 position="fixed"
                 alignItems="center" 
@@ -59,7 +59,7 @@ export const EditPage: VFC = memo(() => {
                         overflow="auto"
                         
                     >
-                        <AllBlog />                
+                        <MyBlog />                
                     </Box>
                 </Flex>
                 <Flex
@@ -72,7 +72,7 @@ export const EditPage: VFC = memo(() => {
                     height="85vh" 
                     width="40vw"
                 >
-                    <MyBlog />
+                    <UserEdit />
                 </Flex>
             </Flex>
         </HeaderFooterLayout>

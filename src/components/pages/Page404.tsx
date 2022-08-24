@@ -4,7 +4,7 @@ import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 
 export const Page404: VFC = memo(() => {
     return (
-        <HeaderFooterLayout>
+        <HeaderFooterLayout iconFlag={false}>
             <p>Page404</p>
         </HeaderFooterLayout>
         );

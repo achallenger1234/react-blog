@@ -17,8 +17,22 @@ export const useAuth = () => {
         axios.get<LoginAuthUser>(`//jsonplaceholder.typicode.com/users/${email}`)
         .then( async res  => { 
             if (res.data && password === '1') {
+                
+                
+                
+                
+                
+                //api叩いて認証
+                
+                
+                //userId取得
+            
+                const userId = Number(email);
+                
+                
                 navigate('blog');
                 const loginUser: LoginUser = {
+                    userId,
                     email
                 }
                 setLoginUser(loginUser);          
@@ -31,12 +45,6 @@ export const useAuth = () => {
         })
         .catch( () => {console.log("missing");
             
-                            //落ちたからとりあえず
-                                navigate('blog');
-                const loginUser: LoginUser = {
-                    email
-                }
-                setLoginUser(loginUser);  
         } )
         .finally( () => setLoading(false) )
         

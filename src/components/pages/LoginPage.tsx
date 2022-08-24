@@ -38,7 +38,7 @@ export const LoginPage: VFC = memo(() => {
     }
     
     return (
-        <HeaderFooterLayout>
+        <HeaderFooterLayout iconFlag={false}>
             <Flex 
                 position="fixed"
                 alignItems="center" 

@@ -1,89 +1,48 @@
-import { VFC, memo, useState } from "react"
+import { VFC, memo, useEffect} from "react"
 
-
-import { 
-    Flex ,
-    Center,
-    Stack , 
-    Box,
+import {
     Heading,
-    Divider,
-    FormControl,
-    FormLabel,
-    Input,
-    FormHelperText,
-    FormErrorMessage,
-    Textarea
-    
-} from "@chakra-ui/react";
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+    Box,
+    Center
+} from '@chakra-ui/react'
 
-import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserProvider";
+import { EditIcon, DeleteIcon  } from '@chakra-ui/icons'
 
-import { DefaultButton } from "../../atoms/button/DefaultButton"
+import { useMyBlogs } from "../../../hooks/Blog/useMyBlogs"
 
 export const MyBlog: VFC = memo(() => {
-    
-    const loginUser: LoginUser = useLoginUser().loginUser
-    console.log(loginUser);//email get ok
-    
-    const [ inputTitle, setInputTitle ] = useState(); 
-    
-    const [ inputText, setInputText ] = useState();
-    
-    const onChangeTitle= (e) => setInputTitle(e.target.value)
-    
-    const onChangeText= (e) => setInputText(e.target.value)
-    
-    const onClickCencel = () => {
-        
-    }
-    
-    const onClickPost = () => {
-        
-    }
-
-    return (
-        <Box
-            bg="white"
-            borderRadius="10px"
-            shadow="md"
-            w="30vw"
-            h="65vh"
-            p="1vh"
+    const { blogs, getAllBlogs } = useMyBlogs();
+    useEffect(() => getAllBlogs(), [getAllBlogs]);
+    return ( 
+        <Accordion 
+            allowToggle
+            overflow="auto"
         >
-            <Heading as="h3" size="md" textAlign="center">new post</Heading>
-            <Divider my={2} />
-            <FormControl isRequired>
-                <FormLabel>Title</FormLabel>
-                <Input 
-                    placeholder='morning routean'
-                    onChange={onChangeTitle}
-                />
-            </FormControl>
-            <FormControl isRequired>
-                <FormLabel>Body</FormLabel>
-                <Textarea 
-                    placeholder='I don`t like morning. So I don`t like mornig'
-                    h="30vh"
-                    w="29vw"
-                    onChange={onChangeText}
-                />
-                <Divider my={2} />
-                <Center ml="4vw" mr="4vw">
-                    <DefaultButton
-                        onClick={onClickCencel}
-                        loading={false}
-                        disabled={inputTitle === "" && inputText === ""}
-                    >Cancel</DefaultButton>
-                    <Divider mx={10} />
-                    <DefaultButton
-                        onClick={onClickPost}
-                        loading={false}
-                        disabled={inputTitle === "" || inputText === ""}
-                    >Post</DefaultButton>
-                </Center>
-            </FormControl>
-        </Box>
+            {blogs.map(obj => (
+                <AccordionItem key={obj.id}>
+                    <Heading w="55vw">
+                        <AccordionButton>
+                            <Box flex='1' textAlign='left' w="40vw">
+                                {obj.userId}     : {obj.title}
+                            </Box>
+                            <AccordionIcon ml="1vw"/>
+                            <EditIcon ml="1vw"/>
+                            <DeleteIcon ml="1vw" />
+                        </AccordionButton>
+                    </Heading>
+                    <AccordionPanel pb={4} ml="2vw" w="55vw">
+                        <Center>
+                          {obj.body}
+                         </Center>
+                    </AccordionPanel>
+                </AccordionItem>            
+            ))}
+        </Accordion>
     );
 });
 

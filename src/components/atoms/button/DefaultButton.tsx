@@ -26,6 +26,7 @@ export const DefaultButton: VFC<Props> = (props) => {
             onClick={onClick}
             isLoading={loading}
             disabled={disabled}
+            px={10}
         >
             {children}
         </Button>

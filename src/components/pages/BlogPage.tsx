@@ -6,7 +6,7 @@ import {
     Box
 } from "@chakra-ui/react";
 
-import { MyBlog } from "../organisms/blog/MyBlog";
+import { CreateBlog } from "../organisms/blog/CreateBlog";
 import { AllBlog } from "../organisms/blog/AllBlog";
 import { SerchBlog } from "../organisms/blog/SerchBlog";
 
@@ -20,7 +20,7 @@ import { useLoginUser, LoginUser } from "../../hooks/Providers/useLoginUserProvi
 export const BlogPage: VFC = memo(() => {
     
     return (
-        <HeaderFooterLayout>
+        <HeaderFooterLayout iconFlag={true}>
             <Flex                 
                 position="fixed"
                 alignItems="center" 
@@ -72,7 +72,7 @@ export const BlogPage: VFC = memo(() => {
                     height="85vh" 
                     width="40vw"
                 >
-                    <MyBlog />
+                    <CreateBlog />
                 </Flex>
             </Flex>
         </HeaderFooterLayout>

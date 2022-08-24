@@ -6,10 +6,10 @@ import {
     Flex,
     Heading,
     Center,
-    useDisclosure
-    
-    
 } from "@chakra-ui/react";
+
+
+
 
 
 
@@ -17,19 +17,37 @@ import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserPr
 
 import { MenuIconButton } from "../../atoms/button/MenuIconButton"
 
-export const Header: VFC = memo(() => {
+import { LogoutButton } from "../../atoms/button/LogoutButton"
+
+type Props = {
+  iconFlag: boolean
+};
+
+export const Header: VFC = memo((props: Props) => {
+    
+    const { iconFlag } = props;
     
     const navigate = useNavigate();
     
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { setLoginUser } = useLoginUser();
+    
     
     const loginUser: LoginUser = useLoginUser().loginUser
-    console.log(loginUser);
+    
+
     
     const onClickEdit = () => {
         navigate('/edit');
     }
     
+    const onClickHome = () => {
+        navigate('/blog');
+    }
+    
+    const onclickLogout = () => {
+        setLoginUser(null); 
+        navigate('/');
+    }
     
     return (        
         <>
@@ -53,8 +71,13 @@ export const Header: VFC = memo(() => {
                 {loginUser == null ? (
                     <p></p>
                 ) : (
-                <Center  mr="2vw">
-                    <MenuIconButton onOpen={onClickEdit}/>
+                <Center  mr="1vw">
+                    {iconFlag ? (
+                        <MenuIconButton onOpen={onClickEdit} iconFlag={iconFlag}/>
+                    ) : (
+                        <MenuIconButton onOpen={onClickHome} iconFlag={iconFlag}/>
+                    )}
+                    <LogoutButton onOpen={onclickLogout} />
                 </Center>
                 ) }
 

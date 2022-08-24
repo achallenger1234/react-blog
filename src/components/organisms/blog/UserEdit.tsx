@@ -1,0 +1,145 @@
+import { VFC, memo, useState } from "react"
+
+
+import { 
+    Flex ,
+    Center,
+    Stack , 
+    Box,
+    Heading,
+    Divider,
+    FormControl,
+    FormLabel,
+    Input,
+    FormHelperText,
+    FormErrorMessage,
+    Textarea
+    
+} from "@chakra-ui/react";
+
+import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserProvider";
+
+import { DefaultButton } from "../../atoms/button/DefaultButton"
+
+export const UserEdit: VFC = memo(() => {
+    
+    const loginUser: LoginUser = useLoginUser().loginUser
+    console.log(loginUser);//email get ok
+    
+    const [ inputTitle, setInputTitle ] = useState(); 
+    
+    const [ inputText, setInputText ] = useState();
+    
+    const onChangeTitle= (e) => setInputTitle(e.target.value)
+    
+    const onChangeText= (e) => setInputText(e.target.value)
+    
+    const onClickCencel = () => {
+        
+    }
+    
+    const onClickPost = () => {
+        
+    }
+    
+    const flag = true;
+
+    return (
+        <>
+        {!flag ?  (
+        
+            <Box
+                bg="white"
+                borderRadius="10px"
+                shadow="md"
+                w="30vw"
+                h="65vh"
+                p="1vh"
+            >
+                <Heading as="h3" size="md" textAlign="center">user edit</Heading>
+                <Divider my={2} />
+                <FormControl isRequired>
+                    <FormLabel>name</FormLabel>
+                    <Input 
+                        onChange={onChangeTitle}
+                    />
+                </FormControl>
+                <FormControl isRequired>
+                    <FormLabel>password</FormLabel>
+                    <Input 
+                        onChange={onChangeTitle}
+                    />
+                    <Divider my={70} />
+                    <Center ml="4vw" mr="4vw">
+                        <Flex>
+                            <DefaultButton
+                                onClick={onClickCencel}
+                                loading={false}
+                                disabled={inputTitle === "" && inputText === ""}
+                            >Cancel</DefaultButton>
+                            <Divider mx={10} />
+                            <DefaultButton
+                                onClick={onClickPost}
+                                loading={false}
+                                disabled={inputTitle === "" || inputText === ""}
+                            >change</DefaultButton>
+                        </Flex>
+                    </Center>
+                </FormControl>
+            </Box>
+            
+        ) : (
+        
+            <Box
+                bg="white"
+                borderRadius="10px"
+                shadow="md"
+                w="30vw"
+                h="65vh"
+                p="1vh"
+            >
+                <Heading as="h3" size="md" textAlign="center">change post</Heading>
+                <Divider my={2} />
+                <FormControl isRequired>
+                    <FormLabel>new Title</FormLabel>
+                    <Input 
+                        placeholder='pre title'
+                        onChange={onChangeTitle}
+                    />
+                </FormControl>
+                <FormControl isRequired>
+                    <FormLabel>new Text</FormLabel>
+                    <Textarea 
+                        placeholder='pre body'
+                        h="30vh"
+                        w="29vw"
+                        onChange={onChangeText}
+                    />
+                    <Divider my={1} />
+                    <Center ml="4vw" mr="4vw">
+                        <DefaultButton
+                            onClick={onClickCencel}
+                            loading={false}
+                            disabled={inputTitle === "" && inputText === ""}
+                        >Cancel</DefaultButton>
+                        <Divider mx={10} />
+                        <DefaultButton
+                            onClick={onClickPost}
+                            loading={false}
+                            disabled={inputTitle === "" || inputText === ""}
+                        >Update</DefaultButton>
+                    </Center>
+                </FormControl>
+            </Box>
+            
+        )}
+        
+        </>
+        
+        
+        
+    );
+});
+
+
+export {};
