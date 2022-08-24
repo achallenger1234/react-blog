@@ -24,10 +24,20 @@ export const useAuth = () => {
                 setLoginUser(loginUser);          
             } else { 
                 console.log("missing");
+                
+
             }
 
         })
-        .catch( () => {console.log("missing");} )
+        .catch( () => {console.log("missing");
+            
+                            //落ちたからとりあえず
+                                navigate('blog');
+                const loginUser: LoginUser = {
+                    email
+                }
+                setLoginUser(loginUser);  
+        } )
         .finally( () => setLoading(false) )
         
     }, [])

@@ -1,5 +1,7 @@
 import { memo, VFC } from "react";
 
+import { useNavigate } from "react-router-dom"
+
 import { 
     Flex,
     Heading,
@@ -10,16 +12,23 @@ import {
 } from "@chakra-ui/react";
 
 
+
 import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserProvider"
 
-import { MenuIconButton } from "../../atoms/button/MenuIconButton";
+import { MenuIconButton } from "../../atoms/button/MenuIconButton"
 
 export const Header: VFC = memo(() => {
+    
+    const navigate = useNavigate();
     
     const { isOpen, onOpen, onClose } = useDisclosure();
     
     const loginUser: LoginUser = useLoginUser().loginUser
     console.log(loginUser);
+    
+    const onClickEdit = () => {
+        navigate('/edit');
+    }
     
     
     return (        
@@ -44,9 +53,8 @@ export const Header: VFC = memo(() => {
                 {loginUser == null ? (
                     <p></p>
                 ) : (
-                <Center>
-                    <p>humberger</p>
-                    <MenuIconButton onOpen={onOpen} />
+                <Center  mr="2vw">
+                    <MenuIconButton onOpen={onClickEdit}/>
                 </Center>
                 ) }
 

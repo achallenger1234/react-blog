@@ -17,7 +17,7 @@ import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 
 import { useLoginUser, LoginUser } from "../../hooks/Providers/useLoginUserProvider";
 
-export const BlogPage: VFC = memo(() => {
+export const EditPage: VFC = memo(() => {
     
     return (
         <HeaderFooterLayout>

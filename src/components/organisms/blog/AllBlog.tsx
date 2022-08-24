@@ -19,12 +19,11 @@ export const AllBlog: VFC = memo(() => {
     return ( 
         <Accordion 
             allowToggle
-
             overflow="auto"
         >
             {blogs.map(obj => (
                 <AccordionItem key={obj.id}>
-                    <Heading w="58vw">
+                    <Heading w="55vw">
                         <AccordionButton>
                             <Box flex='1' textAlign='left' w="40vw">
                                 {obj.userId}     : {obj.title}

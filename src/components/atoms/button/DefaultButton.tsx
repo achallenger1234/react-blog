@@ -5,7 +5,7 @@ import { Button } from '@chakra-ui/react';
 type Props = {
     children: ReactNode;
     disabled: boolean;
-    loading: boolean;
+    loading: boolean
     onClick: () => void;
 }
 
