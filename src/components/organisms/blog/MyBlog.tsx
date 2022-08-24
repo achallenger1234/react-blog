@@ -35,6 +35,7 @@ export const MyBlog: VFC = memo(() => {
     }
     
     const onClickEdit = () => {
+        console.log("editbutton")
         setSelectBlog(blogId)
     }
     return ( 
@@ -45,7 +46,7 @@ export const MyBlog: VFC = memo(() => {
             {blogs.map(obj => (
                 <AccordionItem key={obj.id}>
                     <Center w="55vw">
-                        <AccordionButton value={obj.id} onChange={onChangeSelectBlog}>
+                        <AccordionButton value={obj.id} >
                             <Box flex='1' textAlign='left' w="40vw">
                                 {obj.userId} : {obj.title}
                             </Box>
@@ -55,7 +56,7 @@ export const MyBlog: VFC = memo(() => {
                     <AccordionPanel pb={4} ml="2vw" w="55vw">
                         <Center>
                           {obj.body}
-                        <EditIcon ml="1vw" onClick={onClickEdit}/>
+                        <EditIcon ml="1vw" onChange={onChangeSelectBlog} onClick={onClickEdit}/>
                         <DeleteIcon ml="1vw" />
                          </Center>
                     </AccordionPanel>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useCallback } from 'react';
 
 import axios from "axios";
 
@@ -14,7 +14,7 @@ export const useMyBlogs = () => {
     console.log(loginUser);
     
     const [blogs, setBlogs] = useState<Array<Blog>>([]);
-    const getAllBlogs = () => {
+    const getAllBlogs = useCallback(() => {
         axios.get(`//jsonplaceholder.typicode.com/posts/?userId=${loginUser}`)
         .then( async res => {
             console.log(res.data)
@@ -24,7 +24,7 @@ export const useMyBlogs = () => {
             //[].length=0だったらメッセージ
             )
         .finally()
-    }
+    }, [])
     
     return { blogs, getAllBlogs }
 }
