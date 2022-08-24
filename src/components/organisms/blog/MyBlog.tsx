@@ -27,16 +27,10 @@ export const MyBlog: VFC = memo(() => {
     useEffect(() => getAllBlogs(), [getAllBlogs]);
     const { setSelectBlog } = useSelectBlog();
     
-    const [blogId, setBlogId] = useState();
-    
-    const onChangeSelectBlog = (e: ChangeEvent<HTMLInputElement>) => {
-        setBlogId(e.target.value);
-        console.log(blogId);
-    }
-    
-    const onClickEdit = () => {
+    const onClickEdit = (id) => {
         console.log("editbutton")
-        setSelectBlog(blogId)
+        console.log(id)
+        setSelectBlog(id)
     }
     return ( 
         <Accordion 
@@ -56,7 +50,7 @@ export const MyBlog: VFC = memo(() => {
                     <AccordionPanel pb={4} ml="2vw" w="55vw">
                         <Center>
                           {obj.body}
-                        <EditIcon ml="1vw" onChange={onChangeSelectBlog} onClick={onClickEdit}/>
+                        <EditIcon ml="1vw" type="button" onClick={() => onClickEdit(obj.id)}/>
                         <DeleteIcon ml="1vw" />
                          </Center>
                     </AccordionPanel>

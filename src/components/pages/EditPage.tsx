@@ -29,75 +29,69 @@ export const EditPage: VFC = memo(() => {
     
     const [blogEditFlag, setblogEditFlag] = useState(true)
     
-    const arraySelectBlog: SelectBlog = useSelectBlog().SelectBlog
+    const SelectBlog: SelectBlog = useSelectBlog().SelectBlog
     
-    try{
-        if ( arraySelectBlog.id == null ) {
-            console.log("null")
-        } else {
-            var selectBlog = arraySelectBlog.id
-            console.log(selectBlog);
-        }
-    } finally{
-        return (
-        <HeaderFooterLayout iconFlag={false}>
-            <Flex                 
+    console.log(SelectBlog)
+    
+    
+    return (
+    <HeaderFooterLayout iconFlag={false}>
+        <Flex                 
+            position="fixed"
+            alignItems="center" 
+            justifyContent="center" 
+            top="10%"
+            bottom="5%"
+            height="85%" 
+            width="100vw"
+        >
+            <Flex
                 position="fixed"
                 alignItems="center" 
                 justifyContent="center" 
                 top="10%"
                 bottom="5%"
-                height="85%" 
-                width="100vw"
+                left="0%"
+                height="85vh" 
+                width="65vw"
             >
-                <Flex
+                <Box
                     position="fixed"
-                    alignItems="center" 
-                    justifyContent="center" 
+                    left="5vw"
                     top="10%"
-                    bottom="5%"
-                    left="0%"
-                    height="85vh" 
-                    width="65vw"
+                    w="60vw"
+                    h="15vh"
                 >
-                    <Box
-                        position="fixed"
-                        left="5vw"
-                        top="10%"
-                        w="60vw"
-                        h="15vh"
-                    >
-                        <SerchBlog />                
-                    </Box>
-                    <Box
-                        position="fixed"
-                        left="5vw"
-                        bottom="10%"
-                        w="57vw"
-                        h="65vh"
-                        mr="3vw"
-                        overflow="auto"
-                        
-                    >
-                        <MyBlog />                
-                    </Box>
-                </Flex>
-                <Flex
+                    <SerchBlog />                
+                </Box>
+                <Box
                     position="fixed"
-                    alignItems="center" 
-                    justifyContent="center" 
-                    top="10%"
-                    bottom="5%"
-                    right="0%"
-                    height="85vh" 
-                    width="40vw"
+                    left="5vw"
+                    bottom="10%"
+                    w="57vw"
+                    h="65vh"
+                    mr="3vw"
+                    overflow="auto"
+                    
                 >
-                    {blogEditFlag ? (<UserEdit />) : (<BlogEdit />)}
-                </Flex>
+                    <MyBlog />                
+                </Box>
             </Flex>
-        </HeaderFooterLayout>
-        );
-    }
-    
+            <Flex
+                position="fixed"
+                alignItems="center" 
+                justifyContent="center" 
+                top="10%"
+                bottom="5%"
+                right="0%"
+                height="85vh" 
+                width="40vw"
+            >
+                {SelectBlog == null ? (<UserEdit />) : (<BlogEdit />)}
+            </Flex>
+        </Flex>
+    </HeaderFooterLayout>
+    );
+
     
 })
