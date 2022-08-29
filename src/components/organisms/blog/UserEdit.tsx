@@ -21,10 +21,14 @@ import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserPr
 
 import { DefaultButton } from "../../atoms/button/DefaultButton"
 
+import { useChangeUser } from "../../../hooks/User/useChangeUser"
+
 export const UserEdit: VFC = memo(() => {
     
     const loginUser: LoginUser = useLoginUser().loginUser
     console.log(loginUser);//email get ok
+    
+    const { changeUser, loading, error } = useChangeUser();
     
     const [ inputNewName, setInputNewName ] = useState(''); 
     
@@ -44,6 +48,8 @@ export const UserEdit: VFC = memo(() => {
     
     const onClickPost = () => {
         //logic
+        console.log('chamgeUserMettod')        
+        changeUser(inputNewName, inputOldPassword, inputNewPassword)
         
         setInputNewName('');
         setInputOldPassword('');
