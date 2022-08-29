@@ -48,9 +48,8 @@ export const UserEdit: VFC = memo(() => {
         setInputNewName('');
         setInputOldPassword('');
         setInputNewPassword('');
-        
-    }
     
+    }
 
     return (
         

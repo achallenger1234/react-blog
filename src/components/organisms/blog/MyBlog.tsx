@@ -1,7 +1,4 @@
-
-// @ts-nocheck
-
-import { VFC, memo, useEffect, useState, ChangeEvent } from "react"
+import React, { VFC, memo, useEffect, useState, ChangeEvent, useRef } from "react"
 
 import {
     Heading,
@@ -12,10 +9,10 @@ import {
     AccordionIcon,
     Box,
     Center,
-    Flex
+
 } from '@chakra-ui/react'
 
-import { EditIcon, DeleteIcon  } from '@chakra-ui/icons'
+import { EditIcon,   } from '@chakra-ui/icons'
 
 import { useMyBlogs } from "../../../hooks/Blog/useMyBlogs"
 
@@ -23,11 +20,15 @@ import { useMyBlogs } from "../../../hooks/Blog/useMyBlogs"
 import { SelectBlog, useSelectBlog } from "../../../hooks/Providers/useSelectBlogProvider"
 
 export const MyBlog: VFC = memo(() => {
+    
+
     const { blogs, getAllBlogs } = useMyBlogs();
     useEffect(() => getAllBlogs(), [getAllBlogs]);
-    const { setSelectBlog } = useSelectBlog();
     
-    const onClickEdit = (id, userId, title, text) => {
+    const { setSelectBlog } = useSelectBlog();
+
+    
+    const onClickEdit = (id: number, userId: number, title: string, text: string) => {
         const selectBlog: SelectBlog = {
             id,
             userId,
@@ -36,12 +37,16 @@ export const MyBlog: VFC = memo(() => {
         }
         setSelectBlog(selectBlog)
     }
+
     return ( 
+        <>
+        {blogs.map(obj => (
+        <>
         <Accordion 
             allowToggle
             overflow="auto"
         >
-            {blogs.map(obj => (
+            
                 <AccordionItem key={obj.id}>
                     <Center w="55vw">
                         <AccordionButton value={obj.id} >
@@ -54,13 +59,25 @@ export const MyBlog: VFC = memo(() => {
                     <AccordionPanel pb={4} ml="2vw" w="55vw">
                         <Center>
                           {obj.body}
-                        <EditIcon ml="1vw" type="button" onClick={() => onClickEdit(obj.id, obj.userId, obj.title, obj.body)}/>
-                        <DeleteIcon ml="1vw" />
-                         </Center>
+                        <EditIcon 
+                            cursor="pointer"
+                            ml="1vw" 
+                            type="button" 
+                            onClick={() => onClickEdit(obj.id, obj.userId, obj.title, obj.body)}/>
+
+
+                        
+                        </Center>
                     </AccordionPanel>
                 </AccordionItem>            
-            ))}
+            
         </Accordion>
+                                
+
+                        
+        </>             
+       ))}
+        </>
     );
 });
 

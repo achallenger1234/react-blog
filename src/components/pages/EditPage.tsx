@@ -14,7 +14,7 @@ import { SerchBlog } from "../organisms/blog/SerchBlog";
 import { MyBlog } from "../organisms/blog/MyBlog";
 
 import { UserEdit } from "../organisms/blog/UserEdit";
-import { ChangeBlog } from "../organisms/blog/ChangeBlog";
+import { EditBlog } from "../organisms/blog/EditBlog";
 
 import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 
@@ -87,7 +87,7 @@ export const EditPage: VFC = memo(() => {
                 height="85vh" 
                 width="40vw"
             >
-                {selectBlog == null ? (<UserEdit />) : (<ChangeBlog />)}
+                {selectBlog == null ? (<UserEdit />) : (<EditBlog />)}
             </Flex>
         </Flex>
     </HeaderFooterLayout>

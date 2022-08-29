@@ -1,4 +1,4 @@
-import { VFC, memo, useState, useEffect } from "react"
+import { VFC, memo, useState, useEffect, useRef } from "react"
 
 
 import { 
@@ -13,11 +13,19 @@ import {
     Input,
     FormHelperText,
     FormErrorMessage,
-    Textarea
+    Textarea,
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+    Button,
+    useDisclosure
     
 } from "@chakra-ui/react";
 
-import { CloseIcon } from '@chakra-ui/icons'
+import { CloseIcon , DeleteIcon} from '@chakra-ui/icons'
 
 
 import { DefaultButton } from "../../atoms/button/DefaultButton"
@@ -30,7 +38,10 @@ import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserPr
 import { SelectBlog, useSelectBlog } from "../../../hooks/Providers/useSelectBlogProvider"
 
 
-export const ChangeBlog: VFC = memo(() => {
+import { useDeleteBlog } from "../../../hooks/Blog/useDeleteBlog"
+
+
+export const EditBlog: VFC = memo(() => {
     
     const selectBlog: SelectBlog = useSelectBlog().selectBlog
     console.log(selectBlog);
@@ -38,6 +49,9 @@ export const ChangeBlog: VFC = memo(() => {
     const { setSelectBlog } = useSelectBlog();
     
     const { changeBlog, loading, error } = useChangeBlog()
+    
+        
+    const { deleteBlog } = useDeleteBlog();
     
     const [ inputTitle, setInputTitle ] = useState(''); 
     
@@ -74,9 +88,21 @@ export const ChangeBlog: VFC = memo(() => {
     const onClickClose = () => {
         setSelectBlog(null)
     }
+    
+    const cancelRef = useRef()
+    
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    
+    const onClickDeleteButton = () => {
+        const id: number= selectBlog.id;
+        deleteBlog(id);
+    }
+    
+
 
     return (
-        
+        <>
             <Box
                 bg="white"
                 borderRadius="10px"
@@ -128,7 +154,42 @@ export const ChangeBlog: VFC = memo(() => {
                         disabled={inputTitle === "" || inputText === ""}
                     >Update</DefaultButton>
                 </Center>
+                <Center>
+                    <Heading m="4%" as="h3" size="md" textAlign="center">Delete Blog: </Heading>
+                    <DeleteIcon 
+                        ml="1vw"
+                        cursor="pointer"
+                        onClick={onOpen}
+                    />
+                </Center>
             </Box>
+            <AlertDialog
+                isOpen={isOpen}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+            >
+                <AlertDialogOverlay>
+                  　<AlertDialogContent>
+                        <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                            Delete Blog
+                        </AlertDialogHeader>
+        
+                        <AlertDialogBody>
+                            Are you sure? You can't undo this action afterwards.
+                        </AlertDialogBody>
+        
+                        <AlertDialogFooter>
+                            <Button ref={cancelRef} onClick={onClose}>
+                                Cancel
+                            </Button>
+                            <Button colorScheme='red' onClick={onClickDeleteButton} ml={3}>
+                                Delete
+                            </Button>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialogOverlay>
+            </AlertDialog>
+        </>
             
     );
 });
