@@ -1,4 +1,4 @@
-import { VFC, memo, useState } from "react"
+import { VFC, memo, useState, useEffect } from "react"
 
 
 import { 
@@ -17,18 +17,36 @@ import {
     
 } from "@chakra-ui/react";
 
-import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserProvider";
+import { CloseIcon } from '@chakra-ui/icons'
+
 
 import { DefaultButton } from "../../atoms/button/DefaultButton"
 
-export const BlogEdit: VFC = memo(() => {
+import { useChangeBlog } from "../../../hooks/Blog/useChangeBlog"
+
+
+import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserProvider";
+
+import { SelectBlog, useSelectBlog } from "../../../hooks/Providers/useSelectBlogProvider"
+
+
+export const ChangeBlog: VFC = memo(() => {
     
-    const loginUser: LoginUser = useLoginUser().loginUser
-    console.log(loginUser);//email get ok
+    const selectBlog: SelectBlog = useSelectBlog().selectBlog
+    console.log(selectBlog);
+    
+    const { setSelectBlog } = useSelectBlog();
+    
+    const { changeBlog, loading, error } = useChangeBlog()
     
     const [ inputTitle, setInputTitle ] = useState(''); 
     
     const [ inputText, setInputText ] = useState('');
+    
+    useEffect(() => {
+        setInputTitle(selectBlog.title)
+        setInputText(selectBlog.text)
+    })
     
     const onChangeTitle= (e) => setInputTitle(e.target.value)
     
@@ -39,13 +57,23 @@ export const BlogEdit: VFC = memo(() => {
         setInputText('');
     }
     
-    const onClickPost = () => {
-        //change logic
+    
+    const onClickUpdate = () => {
+        //post logic
+        const id: number= selectBlog.id
+        const userId: number = selectBlog.userId
+        
+        changeBlog(id, userId, inputTitle, inputText)
+        
+        //結果表示
         
         setInputTitle('');
         setInputText('');
     }
     
+    const onClickClose = () => {
+        setSelectBlog(null)
+    }
 
     return (
         
@@ -54,10 +82,19 @@ export const BlogEdit: VFC = memo(() => {
                 borderRadius="10px"
                 shadow="md"
                 w="30vw"
-                h="65vh"
+                h="70vh"
                 p="1vh"
-            >
+            >   
+                <Box>
                 <Heading as="h3" size="md" textAlign="center">change post</Heading>
+                <CloseIcon 
+                    cursor="pointer"
+                    position='absolute'
+                    top="10vh"
+                    right="7vw"
+                    onClick={onClickClose}
+                />
+                </Box>
                 <Divider my={2} />
                 <FormControl isRequired>
                     <FormLabel>new Title</FormLabel>
@@ -86,7 +123,7 @@ export const BlogEdit: VFC = memo(() => {
                     >Cancel</DefaultButton>
                     <Divider mx={10} />
                     <DefaultButton
-                        onClick={onClickPost}
+                        onClick={onClickUpdate}
                         loading={false}
                         disabled={inputTitle === "" || inputText === ""}
                     >Update</DefaultButton>

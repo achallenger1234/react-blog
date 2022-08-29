@@ -59,7 +59,7 @@ export const UserEdit: VFC = memo(() => {
                 borderRadius="10px"
                 shadow="md"
                 w="30vw"
-                h="65vh"
+                h="70vh"
                 p="1vh"
             >
                 <Heading as="h3" size="md" textAlign="center">user edit</Heading>
@@ -85,7 +85,7 @@ export const UserEdit: VFC = memo(() => {
                         onChange={onChangeNewPassword}
                     />
                 </FormControl>
-                <Divider my={38} />
+                <Divider my={27} />
                 <Center ml="4vw" mr="4vw">
                     <DefaultButton
                         onClick={onClickCencel}

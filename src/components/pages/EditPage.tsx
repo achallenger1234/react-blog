@@ -14,7 +14,7 @@ import { SerchBlog } from "../organisms/blog/SerchBlog";
 import { MyBlog } from "../organisms/blog/MyBlog";
 
 import { UserEdit } from "../organisms/blog/UserEdit";
-import { BlogEdit } from "../organisms/blog/BlogEdit";
+import { ChangeBlog } from "../organisms/blog/ChangeBlog";
 
 import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
 
@@ -29,9 +29,9 @@ export const EditPage: VFC = memo(() => {
     
     const [blogEditFlag, setblogEditFlag] = useState(true)
     
-    const SelectBlog: SelectBlog = useSelectBlog().SelectBlog
+    const selectBlog: SelectBlog = useSelectBlog().selectBlog
     
-    console.log(SelectBlog)
+    console.log(selectBlog)
     
     
     return (
@@ -87,7 +87,7 @@ export const EditPage: VFC = memo(() => {
                 height="85vh" 
                 width="40vw"
             >
-                {SelectBlog == null ? (<UserEdit />) : (<BlogEdit />)}
+                {selectBlog == null ? (<UserEdit />) : (<ChangeBlog />)}
             </Flex>
         </Flex>
     </HeaderFooterLayout>

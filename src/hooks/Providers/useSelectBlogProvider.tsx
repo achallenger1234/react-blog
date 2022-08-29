@@ -10,10 +10,13 @@ import React, {
 
 export type SelectBlog = {
     id: number;
+    userId: number
+    title: string;
+    text: string;
 };
 
 type SelectBlogContextType = {
-  SelectBlog: SelectBlog | null;
+  selectBlog: SelectBlog | null;
   setSelectBlog: Dispatch<SetStateAction<SelectBlog | null>>;
 };
 
@@ -24,10 +27,10 @@ const SelectBlogContext = createContext<SelectBlogContextType>(
 // セレクトブログ情報を保持するcontext
 export const SelectBlogProvider = (props: { children: ReactNode }) => {
   const { children } = props;
-  const [SelectBlog, setSelectBlog] = useState<SelectBlog | null>(null);
+  const [selectBlog, setSelectBlog] = useState<SelectBlog | null>(null);
 
   return (
-    <SelectBlogContext.Provider value={{ SelectBlog, setSelectBlog }}>
+    <SelectBlogContext.Provider value={{ selectBlog, setSelectBlog }}>
       {children}
     </SelectBlogContext.Provider>
   );

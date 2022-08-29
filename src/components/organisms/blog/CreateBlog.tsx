@@ -21,6 +21,8 @@ import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserPr
 
 import { DefaultButton } from "../../atoms/button/DefaultButton"
 
+import { useCreateBlog } from "../../../hooks/Blog/useCreateBlog"
+
 export const CreateBlog: VFC = memo(() => {
     
     const loginUser: LoginUser = useLoginUser().loginUser
@@ -30,6 +32,8 @@ export const CreateBlog: VFC = memo(() => {
     
     const [ inputText, setInputText ] = useState('');
     
+    const { insertBlog, loading, error } = useCreateBlog()
+        
     const onChangeTitle= (e) => setInputTitle(e.target.value)
     
     const onChangeText= (e) => setInputText(e.target.value)
@@ -41,6 +45,10 @@ export const CreateBlog: VFC = memo(() => {
     
     const onClickPost = () => {
         //post logic
+        const userId: number = loginUser.userId
+        insertBlog(userId, inputTitle, inputText)
+        
+        //結果表示
         
         setInputTitle('');
         setInputText('');
@@ -52,7 +60,7 @@ export const CreateBlog: VFC = memo(() => {
             borderRadius="10px"
             shadow="md"
             w="30vw"
-            h="65vh"
+            h="70vh"
             p="1vh"
         >
             <Heading as="h3" size="md" textAlign="center">new post</Heading>

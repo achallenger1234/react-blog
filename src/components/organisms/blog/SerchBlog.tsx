@@ -14,9 +14,16 @@ import { Search2Icon } from '@chakra-ui/icons'
 
 export const SerchBlog: VFC = memo(() => {
     
+    const onClickSerch = () => {
+        //serch logic
+    }
+    
     return (
         <>
-            <Search2Icon/>
+            <Search2Icon 
+                cursor="pointer"
+                onClick={onClickSerch}
+            />
             <Input
                 placeholder='Search' 
                 size='lg'
