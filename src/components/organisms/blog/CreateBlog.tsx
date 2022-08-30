@@ -84,13 +84,13 @@ export const CreateBlog: VFC = memo(() => {
                 />
             </FormControl>
             <Divider my={1} />
-            <Center ml="4vw" mr="4vw">
-                <DefaultButton
+            <Center ml="4vw" mr="4vw" >
+                <DefaultButton 
                     onClick={onClickCencel}
                     loading={false}
                     disabled={inputTitle === "" && inputText === ""}
                 >Cancel</DefaultButton>
-                <Divider mx={10} />
+                <Divider mx="3vw" />
                 <DefaultButton
                     onClick={onClickPost}
                     loading={false}

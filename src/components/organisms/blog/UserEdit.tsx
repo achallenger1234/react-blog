@@ -97,7 +97,7 @@ export const UserEdit: VFC = memo(() => {
                         loading={false}
                         disabled={inputNewName === "" && inputOldPassword === "" &&  inputNewPassword === ""}
                     >Cancel</DefaultButton>
-                    <Divider mx={10} />
+                    <Divider mx="3vw" />
                     <DefaultButton
                         onClick={onClickPost}
                         loading={false}

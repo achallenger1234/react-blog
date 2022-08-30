@@ -62,7 +62,7 @@ export const EditPage: VFC = memo(() => {
                     w="60vw"
                     h="15vh"
                 >
-                    <SerchBlog />                
+                    <SerchBlog  allsearchFlag={false}/>                
                 </Box>
                 <Box
                     position="fixed"

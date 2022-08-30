@@ -1,4 +1,4 @@
-import { VFC, memo, useState, useEffect, useRef } from "react"
+import { VFC, memo, useState, useEffect } from "react"
 
 
 import { 
@@ -13,15 +13,7 @@ import {
     Input,
     FormHelperText,
     FormErrorMessage,
-    Textarea,
-    AlertDialog,
-    AlertDialogBody,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogContent,
-    AlertDialogOverlay,
-    Button,
-    useDisclosure
+    Textarea
     
 } from "@chakra-ui/react";
 
@@ -38,10 +30,7 @@ import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserPr
 import { SelectBlog, useSelectBlog } from "../../../hooks/Providers/useSelectBlogProvider"
 
 
-import { useDeleteBlog } from "../../../hooks/Blog/useDeleteBlog"
-
-
-export const EditBlog: VFC = memo(() => {
+export const ChangeBlog: VFC = memo(() => {
     
     const selectBlog: SelectBlog = useSelectBlog().selectBlog
     console.log(selectBlog);
@@ -49,9 +38,6 @@ export const EditBlog: VFC = memo(() => {
     const { setSelectBlog } = useSelectBlog();
     
     const { changeBlog, loading, error } = useChangeBlog()
-    
-        
-    const { deleteBlog } = useDeleteBlog();
     
     const [ inputTitle, setInputTitle ] = useState(''); 
     
@@ -88,21 +74,16 @@ export const EditBlog: VFC = memo(() => {
     const onClickClose = () => {
         setSelectBlog(null)
     }
-    
-    const cancelRef = useRef()
-    
-    const { isOpen, onOpen, onClose } = useDisclosure()
 
     
     const onClickDeleteButton = () => {
-        const id: number= selectBlog.id;
-        deleteBlog(id);
+        
     }
     
 
 
     return (
-        <>
+        
             <Box
                 bg="white"
                 borderRadius="10px"
@@ -147,7 +128,7 @@ export const EditBlog: VFC = memo(() => {
                         loading={false}
                         disabled={inputTitle === "" && inputText === ""}
                     >Cancel</DefaultButton>
-                    <Divider mx="3vw" />
+                    <Divider mx={10} />
                     <DefaultButton
                         onClick={onClickUpdate}
                         loading={false}
@@ -155,47 +136,13 @@ export const EditBlog: VFC = memo(() => {
                     >Update</DefaultButton>
                 </Center>
                 <Center>
-                    <Heading m="4%" as="h3" size="sm" textAlign="center">This Blog: </Heading>
-                    <Button  
-                        leftIcon={<DeleteIcon />}
-                        onClick={onOpen}
-                        colorScheme='teal'
-                        size='sm'
-                        _hover={{ opacity: 0.8 }}
-                        px="1vw"
-                        m="0"
-                    >
-                    Delete
-                    </Button>
+                    <DeleteIcon 
+                        ml="1vw"
+                        cursor="pointer"
+                        onClick={onClickDeleteButton}
+                    />
                 </Center>
             </Box>
-            <AlertDialog
-                isOpen={isOpen}
-                leastDestructiveRef={cancelRef}
-                onClose={onClose}
-            >
-                <AlertDialogOverlay>
-                  　<AlertDialogContent>
-                        <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                            Delete Blog
-                        </AlertDialogHeader>
-        
-                        <AlertDialogBody>
-                            Are you sure? You can't undo this action afterwards.
-                        </AlertDialogBody>
-        
-                        <AlertDialogFooter>
-                            <Button ref={cancelRef} onClick={onClose}>
-                                Cancel
-                            </Button>
-                            <Button colorScheme='red' onClick={onClickDeleteButton} ml={3}>
-                                Delete
-                            </Button>
-                        </AlertDialogFooter>
-                    </AlertDialogContent>
-                </AlertDialogOverlay>
-            </AlertDialog>
-        </>
             
     );
 });
