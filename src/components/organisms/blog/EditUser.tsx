@@ -1,4 +1,4 @@
-import { VFC, memo, useState } from "react"
+import { VFC, memo, useState, useRef } from "react"
 
 
 import { 
@@ -13,24 +13,34 @@ import {
     Input,
     FormHelperText,
     FormErrorMessage,
-    Textarea
+    Textarea,
+    Button,
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+    useDisclosure
     
 } from "@chakra-ui/react";
-
+import { CloseIcon , DeleteIcon} from '@chakra-ui/icons'
 import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserProvider";
 
 import { DefaultButton } from "../../atoms/button/DefaultButton"
 
 import { useChangeUser } from "../../../hooks/User/useChangeUser"
 
-export const UserEdit: VFC = memo(() => {
+import { useDeleteUser } from "../../../hooks/User/useDeleteUser"
+
+export const EditUser: VFC = memo(() => {
     
     const loginUser: LoginUser = useLoginUser().loginUser
     console.log(loginUser);//email get ok
     
     const { changeUser, loading, error } = useChangeUser();
     
-    const [ inputNewName, setInputNewName ] = useState(''); 
+    const [ inputNewName, setInputNewName ] = useState(loginUser.email); 
     
     const [ inputOldPassword, setInputOldPassword ] = useState('');
     
@@ -56,9 +66,20 @@ export const UserEdit: VFC = memo(() => {
         setInputNewPassword('');
     
     }
+    
+    const cancelRef = useRef()
+    
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    
+    const { deleteUser } = useDeleteUser();
+
+
+    const onClickDeleteButton = () => {
+        deleteUser();
+    }
 
     return (
-        
+        <>
             <Box
                 bg="white"
                 borderRadius="10px"
@@ -104,9 +125,49 @@ export const UserEdit: VFC = memo(() => {
                         disabled={inputNewName === "" || inputOldPassword === ""  || inputNewPassword === "" }
                     >change</DefaultButton>
                 </Center>
+                <Center my="0">
+                    <Heading m="4%" as="h3" size="sm" textAlign="center">This Blog: </Heading>
+                    <Button  
+                        leftIcon={<DeleteIcon />}
+                        onClick={onOpen}
+                        colorScheme='teal'
+                        size='sm'
+                        _hover={{ opacity: 0.8 }}
+                        px="1vw"
+                        m="0"
+                    >
+                    Delete
+                    </Button>
+                </Center>
             </Box>
-            
+            <AlertDialog
+                isOpen={isOpen}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+            >
+                <AlertDialogOverlay>
+                  　<AlertDialogContent>
+                        <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                            Delete User
+                        </AlertDialogHeader>
         
+                        <AlertDialogBody>
+                            Are you sure? You can't undo this action afterwards.
+                        </AlertDialogBody>
+        
+                        <AlertDialogFooter>
+                            <Button ref={cancelRef} onClick={onClose}>
+                                Cancel
+                            </Button>
+                            <Button colorScheme='red' onClick={onClickDeleteButton} ml={3}>
+                                Delete
+                            </Button>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialogOverlay>
+            </AlertDialog>
+            
+        </>
     );
 });
 

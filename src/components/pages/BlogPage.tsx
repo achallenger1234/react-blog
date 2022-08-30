@@ -47,7 +47,7 @@ export const BlogPage: VFC = memo(() => {
                         w="60vw"
                         h="15vh"
                     >
-                        <SerchBlog allsearchFlag={true}/>                
+                        <SerchBlog />                
                     </Box>
                     <Box
                         position="fixed"

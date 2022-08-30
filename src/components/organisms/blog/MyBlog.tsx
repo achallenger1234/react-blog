@@ -25,6 +25,8 @@ import { SelectBlog, useSelectBlog } from "../../../hooks/Providers/useSelectBlo
 export const MyBlog: VFC = memo(() => {
     const { blogs, getAllBlogs } = useMyBlogs();
     useEffect(() => getAllBlogs(), [getAllBlogs]);
+    
+    
     const { setSelectBlog } = useSelectBlog();
     
     const onClickEdit = (id, userId, title, text) => {
@@ -36,6 +38,8 @@ export const MyBlog: VFC = memo(() => {
         }
         setSelectBlog(selectBlog)
     }
+    
+    
     return ( 
         <Accordion 
             allowToggle
@@ -54,8 +58,7 @@ export const MyBlog: VFC = memo(() => {
                     <AccordionPanel pb={4} ml="2vw" w="55vw">
                         <Center>
                           {obj.body}
-                        <EditIcon ml="1vw" type="button" onClick={() => onClickEdit(obj.id, obj.userId, obj.title, obj.body)}/>
-                        <DeleteIcon ml="1vw" />
+                        <EditIcon mr="1vw" type="button" onClick={() => onClickEdit(obj.id, obj.userId, obj.title, obj.body)}/>
                          </Center>
                     </AccordionPanel>
                 </AccordionItem>            

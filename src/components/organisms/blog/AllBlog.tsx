@@ -14,6 +14,7 @@ import {
 import { useAllBlogs } from "../../../hooks/Blog/useAllBlogs"
 
 export const AllBlog: VFC = memo(() => {
+    
     const { blogs, getAllBlogs } = useAllBlogs();
     useEffect(() => getAllBlogs(), [getAllBlogs]);
     return ( 

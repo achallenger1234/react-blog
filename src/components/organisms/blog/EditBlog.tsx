@@ -140,7 +140,7 @@ export const EditBlog: VFC = memo(() => {
                         onChange={onChangeText}
                     />
                 </FormControl>
-                <Divider my={1} />
+                <Divider my={0} />
                 <Center ml="4vw" mr="4vw">
                     <DefaultButton
                         onClick={onClickCencel}
@@ -154,7 +154,7 @@ export const EditBlog: VFC = memo(() => {
                         disabled={inputTitle === "" || inputText === ""}
                     >Update</DefaultButton>
                 </Center>
-                <Center>
+                <Center my="0">
                     <Heading m="4%" as="h3" size="sm" textAlign="center">This Blog: </Heading>
                     <Button  
                         leftIcon={<DeleteIcon />}

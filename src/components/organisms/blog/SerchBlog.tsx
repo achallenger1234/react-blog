@@ -1,4 +1,4 @@
-import { VFC, memo} from "react"
+import { VFC, memo, useState, ChangeEvent} from "react"
 
 
 import { 
@@ -10,39 +10,76 @@ import {
     Button
 } from "@chakra-ui/react";
 
-import { Search2Icon } from '@chakra-ui/icons'
+import { Search2Icon, CloseIcon } from '@chakra-ui/icons'
+
+import { SerchtBlog, useSerchBlog } from "../../../hooks/Providers/useSerchBlogProvider"
+
+
+// import { useSerchAllBlogs } from "../../../hooks/Blog/useSerchAllBlogs";
+
+// import { useSerchMyBlogs } from "../../../hooks/Blog/useSerchMyBlogs";
 
 
 
 
-import { useSerchAllBlogs } from "../../../hooks/Blog/useSerchAllBlogs";
-
-import { useSerchMyBlogs } from "../../../hooks/Blog/useSerchMyBlogs";
-
-
-
-
-type Props = {
-    allsearchFlag: boolean;
-}
+// type Props = {
+//     allsearchFlag: boolean;
+// }
 
 
 
-export const SerchBlog: VFC<Props> = memo((props) => {
+// export const SerchBlog: VFC<Props> = memo((props) => {
     
-    const { serchAllBlogs, getSerchAllBlogs } = useSerchAllBlogs();
+    // const { serchAllBlogs, getSerchAllBlogs } = useSerchAllBlogs();
     
-    const { serchMyBlogs, getSerchMyBlogs  }  = useSerchMyBlogs();
+    // const { serchMyBlogs, getSerchMyBlogs  }  = useSerchMyBlogs();
     
-    const allsearchFlag = props;
-    const onClickSerch = () => {
-        //serch logic
-        // allsearchFlag ? {
-        //     //useAllSerch
-        // } : {
-        //     //useMySerch
-        // }
+    // const allsearchFlag = props;
+    // const onClickSerch = () => {
+    //     //serch logic
+    //     // allsearchFlag ? {
+    //     //     //useAllSerch
+    //     // } : {
+    //     //     //useMySerch
+    //     // }
         
+    // }
+    
+
+export const SerchBlog: VFC = memo(() => {
+
+
+    const selectBlogObj: SerchtBlog = useSerchBlog().serchText
+    console.log(selectBlogObj);
+    
+    const { setSerchBlog } = useSerchBlog();
+    
+    const [serchText, setSerchText] = useState('');
+    
+
+    
+
+        
+    
+    const onChangeSerchText = (e: ChangeEvent<HTMLInputElement>) => {
+        setSerchText(e.target.value)
+        console.log(e.target.value)
+    }
+    
+    const onClickSerch = () => {
+
+        const serchBlog: SerchtBlog = {
+            serchText,
+        }
+        setSerchBlog(serchBlog)
+        
+        console.log("setok")
+        
+    }
+
+    const onClickClose = () => {
+        setSerchBlog(null);
+        setSerchText('');
     }
     
     return (
@@ -50,6 +87,7 @@ export const SerchBlog: VFC<Props> = memo((props) => {
             
             <Button  
                 leftIcon={<Search2Icon />}
+                disabled={serchText === ""}
                 onClick={onClickSerch}
                 colorScheme='teal'
                 size='sm'
@@ -67,7 +105,17 @@ export const SerchBlog: VFC<Props> = memo((props) => {
                 w="40vw"
                 variant='flushed'
                 borderColor='Gray.700'
+                value={serchText}
+                onChange={onChangeSerchText}
             />
+            
+                <CloseIcon 
+                    cursor="pointer"
+                    position='absolute'
+                    top="8vh"
+                    right="9vw"
+                    onClick={onClickClose}
+                />
         </>
     );
 });

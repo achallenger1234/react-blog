@@ -15,6 +15,8 @@ import {
 
 import { LoginUser, useLoginUser } from "../../../hooks/Providers/useLoginUserProvider"
 
+import { SerchtBlog, useSerchBlog } from "../../../hooks/Providers/useSerchBlogProvider"
+
 import { MenuIconButton } from "../../atoms/button/MenuIconButton"
 
 import { LogoutButton } from "../../atoms/button/LogoutButton"
@@ -24,7 +26,7 @@ type Props = {
 };
 
 export const Header: VFC = memo((props: Props) => {
-    
+
     const { iconFlag } = props;
     
     const navigate = useNavigate();
@@ -34,18 +36,23 @@ export const Header: VFC = memo((props: Props) => {
     
     const loginUser: LoginUser = useLoginUser().loginUser
     
+    const { setSerchBlog } = useSerchBlog();
+    
 
     
     const onClickEdit = () => {
+        setSerchBlog(null)
         navigate('/edit');
     }
     
     const onClickHome = () => {
+        setSerchBlog(null)
         navigate('/blog');
     }
     
     const onclickLogout = () => {
-        setLoginUser(null); 
+        setLoginUser(null);
+        setSerchBlog(null)    
         navigate('/');
     }
     

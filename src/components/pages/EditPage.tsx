@@ -13,7 +13,7 @@ import {
 import { SerchBlog } from "../organisms/blog/SerchBlog";
 import { MyBlog } from "../organisms/blog/MyBlog";
 
-import { UserEdit } from "../organisms/blog/UserEdit";
+import { EditUser } from "../organisms/blog/EditUser";
 import { EditBlog } from "../organisms/blog/EditBlog";
 
 import { HeaderFooterLayout } from "../templates/HeaderFooterLayout";
@@ -62,7 +62,7 @@ export const EditPage: VFC = memo(() => {
                     w="60vw"
                     h="15vh"
                 >
-                    <SerchBlog  allsearchFlag={false}/>                
+                    <SerchBlog />                
                 </Box>
                 <Box
                     position="fixed"
@@ -87,7 +87,7 @@ export const EditPage: VFC = memo(() => {
                 height="85vh" 
                 width="40vw"
             >
-                {selectBlog == null ? (<UserEdit />) : (<EditBlog />)}
+                {selectBlog == null ? (<EditUser />) : (<EditBlog />)}
             </Flex>
         </Flex>
     </HeaderFooterLayout>
