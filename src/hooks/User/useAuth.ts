@@ -14,6 +14,17 @@ export const useAuth = () => {
     const { setLoginUser } = useLoginUser();
     const login = useCallback((email: string, password: string) => {
         setLoading(true);
+
+
+       axios.get('https://4377ixrdyjthtk62ai4caku5le0lpike.lambda-url.ap-northeast-1.on.aws/ ', {
+        //  params: { date: '2022/2/22', budget: '8000', departure: '東京駅', duration: '60分' }
+       }).then(async res => {
+           console.log(res.data)
+       });
+
+       
+       
+        
         axios.get<LoginAuthUser>(`//jsonplaceholder.typicode.com/users/${email}`)
         .then( async res  => { 
             if (res.data && password === '1') {
